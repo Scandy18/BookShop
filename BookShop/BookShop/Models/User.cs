@@ -30,7 +30,18 @@ namespace BookShop.Models
         [MaxLength(10, ErrorMessage = "MaxLength 10 words")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+
+        public string QQ { get; set; }
+
+        [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter the correct format")]
+        public string Phone { get; set; }
+
+
+        public string Address { get; set; }
+
         
-        
+
+
     }
 }

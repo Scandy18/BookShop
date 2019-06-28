@@ -15,12 +15,12 @@
         <div class="row">
             @Html.LabelFor(m => m.Email, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "邮箱" })
             <div class=" col-md-7">
-                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "请输入用户名", @style = "width:240px;", id = "account" })
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", placeholder = "请输入邮箱", @style = "width:240px;", id = "account" })
                 @Html.ValidationMessageFor(m => m.Email)
             </div>
         </div>
     </div>
-    <div class="form-group" style="height:40px;">
+    <div class="form-group" style="height:40px;margin-top:30px">
         <div class="row">
             @Html.LabelFor(m => m.Password, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "密码" })
             <div class=" col-md-7">
@@ -29,14 +29,15 @@
             </div>
         </div>
     </div>
-    <div class="form-group">
+    <div class="form-group" style="height:40px;margin-top:30px">
         <div class="col-md-5"></div>
         <div class="col-md-2 col-xs-4">
             <input type="submit" value=" 登录" class="btn btn-default" />
         </div>
+        <div class="col-md-2 col-xs-4">
+            <input type="button" onclick="top.location.href='@Url.Action("Register", "Users")'" value="去注册" class="btn btn-default" />
+        </div>
     </div>
 }
 
-
-<h2>Login</h2>
 

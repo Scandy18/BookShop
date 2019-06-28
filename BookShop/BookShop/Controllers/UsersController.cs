@@ -44,7 +44,7 @@ namespace BookShop.Controllers
         {
             if (ModelState.IsValid)
             {
-                User userinfo = LoginAuth.Login(user.Email, user.Password);
+                User userinfo = LoginAuth.Auth(user.Email, user.Password);
                 if(userinfo != null)
                     return RedirectToAction("Index", "Home");
                 else

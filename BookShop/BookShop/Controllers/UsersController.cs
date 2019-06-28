@@ -15,105 +15,139 @@ namespace BookShop.Controllers
         private DataMaintain db = new DataMaintain();
 
         // GET: Users
-        public ActionResult Index()
+        public ActionResult Register()
         {
-            return View(db.User.ToList());
+            //return View(db.User.ToList());
+            return View();
         }
 
-        // GET: Users/Details/5
-        public ActionResult Details(int? id)
+
+        [HttpPost]
+        public ActionResult Register([Bind(Include = "Id,Email,NickName,Password")] User user)
         {
-            if (id == null)
+            if(ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.User.Add(user);
+                db.SaveChanges();
+                return RedirectToAction("Index", "Home");
             }
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
+            return View();
         }
 
-        // GET: Users/Create
-        public ActionResult Create()
+        public ActionResult Login()
         {
             return View();
         }
 
-        // POST: Users/Create
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Email,NickName,Password")] User user)
+        public ActionResult Login([Bind(Include = "Id,Email,NickName,Password")] User user)
         {
             if (ModelState.IsValid)
             {
-                db.User.Add(user);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                User userinfo = LoginAuth.Login(user.Email, user.Password);
+                if(userinfo != null)
+                    return RedirectToAction("Index", "Home");
+                else
+                    return View(user);
             }
-
-            return View(user);
+            return View("Error");
         }
+        
 
-        // GET: Users/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //// GET: Users/Details/5
+        //public ActionResult Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.User.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
 
-        // POST: Users/Edit/5
-        // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
-        // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Email,NickName,Password")] User user)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(user).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            return View(user);
-        }
+        //// GET: Users/Create
+        //public ActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // GET: Users/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            User user = db.User.Find(id);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
+        //// POST: Users/Create
+        //// 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        //// 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Create([Bind(Include = "Id,Email,NickName,Password")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.User.Add(user);
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
 
-        // POST: Users/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            User user = db.User.Find(id);
-            db.User.Remove(user);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
+        //    return View(user);
+        //}
+
+        //// GET: Users/Edit/5
+        //public ActionResult Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.User.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
+
+        //// POST: Users/Edit/5
+        //// 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
+        //// 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Edit([Bind(Include = "Id,Email,NickName,Password")] User user)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(user).State = EntityState.Modified;
+        //        db.SaveChanges();
+        //        return RedirectToAction("Index");
+        //    }
+        //    return View(user);
+        //}
+
+        //// GET: Users/Delete/5
+        //public ActionResult Delete(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    User user = db.User.Find(id);
+        //    if (user == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    return View(user);
+        //}
+
+        //// POST: Users/Delete/5
+        //[HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult DeleteConfirmed(int id)
+        //{
+        //    User user = db.User.Find(id);
+        //    db.User.Remove(user);
+        //    db.SaveChanges();
+        //    return RedirectToAction("Index");
+        //}
 
         protected override void Dispose(bool disposing)
         {

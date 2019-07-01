@@ -1,0 +1,53 @@
+﻿@model BookShop.Models.Book
+
+@{
+    ViewBag.Title = "BookDetail";
+}
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+<div class="table-responsive">
+    <br /><br /><h2>出售详情</h2><br /><br />
+    <table border="0" cellspacing="0" cellpadding="0" class="table">
+        @*<tr class=" label-primary">
+                <th scope="col" width="50%"><span style="color:white"></span></th>
+                <th scope="col"><span style="color:white"></span></th>
+            </tr>*@
+        <tr>
+            <td>书名</td>
+            <td>@Html.DisplayFor(model => model.BookName)</td>@*也可以直接Model.BookName*@
+        </tr>
+        <tr>
+            <td>出售人</td>
+            <td>@Html.DisplayFor(model => model.Seller)</td>
+        </tr>
+        <tr>
+            <td>现价</td>
+            <td>@Html.DisplayFor(model => model.CurPrice)</td>
+        </tr>
+        <tr>
+            <td>原价</td>
+            <td>@Html.DisplayFor(model => model.OrgPrice)</td>
+        </tr>
+        <tr>
+            <td>类别</td>
+            <td>@Html.DisplayFor(model => model.Catogory)</td>
+        </tr>
+        <tr>
+            <td>ISBN</td>
+            <td>@Html.DisplayFor(model => model.ISBN)</td>
+        </tr>
+        <tr>
+            <td>介绍</td>
+            <td>@Html.DisplayFor(model => model.Introduce)</td>
+        </tr>
+    </table>
+
+    <div class="col-md-2 col-xs-4">
+        <input type="button" onclick="top.location.href='@Url.Action("Buy", "Books", new { id = Model.Id })'" value="购买" class="btn btn-default" />
+    </div>
+
+    <div class="col-md-2 col-xs-4">
+        <input type="button" onclick="top.location.href='@Url.Action("Index", "Home")'" value="返回" class="btn btn-default" />
+    </div>
+</div>

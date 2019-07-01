@@ -1,31 +1,47 @@
-﻿@{
+﻿@model List<BookShop.Models.Book>
+
+@using BookShop.Models;
+
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
+<div class="table-responsive">
+    <br /><br /><h2>在售书籍</h2><br /><br />
+    <table border="0" cellspacing="0" cellpadding="0" class="table">
+        <tr class=" label-primary">
+            <th scope="col"><span style="color:white">书名</span></th>
+            <th scope="col"><span style="color:white">出售人</span></th>
+            <th scope="col"><span style="color:white">现价</span></th>
+            <th scope="col"><span style="color:white">原价</span></th>
+            <th scope="col"><span style="color:white">种类</span></th>
+            <th scope="col"><span style="color:white">ISBN</span></th>
+            <th scope="col"><span style="color:white">介绍</span></th>
+        </tr>
+        @{
+            DataMaintain db = new DataMaintain();
+            List<Book> books = db.Book.ToList();
+            foreach (var book in books) //所有在售书的列表
+            {
+                string seller = "";
+                User user = db.User.Find(book.Seller);
+                if (user != null)
+                {
+                    seller = user.NickName;
+                }
+                <tr onclick="top.location.href='@Url.Action("BookDetail", "Books", new { id = book.Id })'">
+                    <td>@book.BookName</td>
+                    <td>@seller</td>
+                    <td>@book.CurPrice</td>
+                    <td>@book.OrgPrice</td>
+                    <td>@book.Catogory</td>
+                    <td>@book.ISBN</td>
+                    <td>@book.Introduce</td>
+                </tr>
+            }
+        }
+    </table>
 </div>

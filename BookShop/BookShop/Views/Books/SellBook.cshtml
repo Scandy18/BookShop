@@ -1,0 +1,76 @@
+﻿@model BookShop.Models.Book
+
+@{
+    ViewBag.Title = "SellBook";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryval")
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-group" style="height:40px;margin-top:50px">
+        <div class="row">
+            @Html.LabelFor(m => m.BookName, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "书名" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.BookName, new { @class = "form-control", placeholder = "书名", @style = "width:240px;", id = "bookname" })
+                @Html.ValidationMessageFor(m => m.BookName)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="row">
+            @Html.LabelFor(m => m.CurPrice, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "现价" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.CurPrice, new { @class = "form-control", placeholder = "现价", @style = "width:240px;", id = "nickname" })
+                @Html.ValidationMessageFor(m => m.CurPrice)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="row">
+            @Html.LabelFor(m => m.OrgPrice, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "原价" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.OrgPrice, new { @class = "form-control", placeholder = "原价", @style = "width:240px;", id = "nickname" })
+                @Html.ValidationMessageFor(m => m.OrgPrice)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="row">
+            @Html.LabelFor(m => m.Catogory, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "类别" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.Catogory, new { @class = "form-control", placeholder = "类别", @style = "width:240px;", id = "nickname" })
+                @Html.ValidationMessageFor(m => m.Catogory)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="row">
+            @Html.LabelFor(m => m.ISBN, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "ISBN" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.ISBN, new { @class = "form-control", placeholder = "ISBN", @style = "width:240px;", id = "nickname" })
+                @Html.ValidationMessageFor(m => m.ISBN)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="row">
+            @Html.LabelFor(m => m.Introduce, new { @class = "col-md-5 control-label", @style = "text-align:right", @for = "介绍" })
+            <div class=" col-md-7">
+                @Html.TextBoxFor(m => m.Introduce, new { @class = "form-control", placeholder = "介绍", @style = "width:240px;", id = "nickname" })
+                @Html.ValidationMessageFor(m => m.Introduce)
+            </div>
+        </div>
+    </div>
+    <div class="form-group" style="height:40px;margin-top:30px">
+        <div class="col-md-5"></div>
+        <div class="col-md-2 col-xs-4">
+            <input type="submit" value=" 提交出售" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br />
+<h2>SellBook</h2>
+

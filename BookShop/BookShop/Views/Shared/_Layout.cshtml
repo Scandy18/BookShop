@@ -31,8 +31,9 @@
                         User curUser = db.User.FirstOrDefault(m => m.Id == curid);
                         if (curUser != null)
                         {
-                            <li><a href="@Url.Action("UserIndex", "Users")"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
-                            @*<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span>@Html.ActionLink(curUser.NickName, "Index", "Users")</li>*@
+                            <li><a href="@Url.Action("SellBook", "Books")"><span class=""></span> 出售书籍 </a></li>
+                            <li><a href="@Url.Action("UserRecvMsg", "Users")"><span class=""></span> 我的消息 </a></li>
+                            <li><a href="@Url.Action("UserIndex", "Users")"><span class="glyphicon glyphicon-user"></span> 个人中心 </a></li>
                         }
                         else
                         {

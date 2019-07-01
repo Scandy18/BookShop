@@ -115,4 +115,3 @@ D:\GitHub\BookShop\BookShop\BookShop\bin\System.Web.Http.WebHost.dll
 D:\GitHub\BookShop\BookShop\BookShop\bin\System.Net.Http.Formatting.xml
 D:\GitHub\BookShop\BookShop\BookShop\bin\System.Web.Http.xml
 D:\GitHub\BookShop\BookShop\BookShop\bin\System.Web.Http.WebHost.xml
-D:\GitHub\BookShop\BookShop\BookShop\obj\Debug\BookShop.csprojAssemblyReference.cache

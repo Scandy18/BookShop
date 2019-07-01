@@ -37,7 +37,6 @@ namespace BookShop.Models
         [DataType(DataType.PhoneNumber, ErrorMessage = "Please enter the correct format")]
         public string Phone { get; set; }
 
-
         public string Address { get; set; }
 
         

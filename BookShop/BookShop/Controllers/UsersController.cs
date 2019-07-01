@@ -61,6 +61,39 @@ namespace BookShop.Controllers
         {
             return View();
         }
+
+        public ActionResult UserEdit(int? id)//提交的user表单实体
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            User user = db.User.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserEdit([Bind(Include = "Id,Email,NickName,Password,Phone,QQ,Address")] User user)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(user).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("UserIndex");
+            }
+            return View("Error");
+        }
+
+        public ActionResult Logoff()
+        {
+            SessionHelper.Del("id");
+            return RedirectToAction("Login");
+        }
         //// GET: Users/Details/5
         //public ActionResult Details(int? id)
         //{

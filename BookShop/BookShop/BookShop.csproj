@@ -158,7 +158,6 @@
     </Compile>
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\DataMaintain.cs" />
-    <Compile Include="Models\DbConnect.cs" />
     <Compile Include="Models\LoginAuth.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\User.cs" />

@@ -29,6 +29,7 @@ namespace BookShop.Controllers
             {
                 db.User.Add(user);
                 db.SaveChanges();
+                SessionHelper.SetSession("id", user.Id);
                 return RedirectToAction("Index", "Home");
             }
             return View();
@@ -46,14 +47,20 @@ namespace BookShop.Controllers
             {
                 User userinfo = LoginAuth.Auth(user.Email, user.Password);
                 if(userinfo != null)
+                {
+                    SessionHelper.SetSession("id", userinfo.Id);
                     return RedirectToAction("Index", "Home");
+                }
                 else
                     return View(user);
             }
             return View("Error");
         }
-        
 
+        public ActionResult UserIndex()
+        {
+            return View();
+        }
         //// GET: Users/Details/5
         //public ActionResult Details(int? id)
         //{

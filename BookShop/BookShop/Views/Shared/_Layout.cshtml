@@ -1,7 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using BookShop.Controllers;
+@using BookShop.Models;
+<!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - 我的 ASP.NET 应用程序</title>
@@ -20,8 +22,29 @@
                 @Html.ActionLink("旧书交易网站", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("个人主页", "Index", "Users")</li>
+                
+                <ul class="nav navbar-nav pull-right">
+                    @if (SessionHelper.Get("id") != null)
+                    {
+                        DataMaintain db = new DataMaintain();
+                        int curid = int.Parse(SessionHelper.Get("id").ToString());
+                        User curUser = db.User.FirstOrDefault(m => m.Id == curid);
+                        if (curUser != null)
+                        {
+                            <li><a href="@Url.Action("UserIndex", "Users")"><span class="glyphicon glyphicon-user"></span> 个人中心</a></li>
+                            @*<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span>@Html.ActionLink(curUser.NickName, "Index", "Users")</li>*@
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("注册", "Register", "Users")</li>
+                            <li>@Html.ActionLink("登录", "Login", "Users")</li>
+                        }
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("注册", "Register", "Users")</li>
+                        <li>@Html.ActionLink("登录", "Login", "Users")</li>
+                    }
                 </ul>
             </div>
         </div>

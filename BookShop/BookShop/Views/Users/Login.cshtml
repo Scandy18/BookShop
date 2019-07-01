@@ -10,6 +10,7 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
     @Html.ValidationSummary(true)
     <div class="form-group" style="height:40px;margin-top:50px">
         <div class="row">
@@ -29,14 +30,14 @@
             </div>
         </div>
     </div>
-    <div class="form-group" style="height:40px;margin-top:30px">
+    <div class="form-group" style="height:40px;margin-top:40px">
         <div class="col-md-5"></div>
-        <div class="col-md-2 col-xs-4">
+        <div class="col-md-2 col-xs-2">
             <input type="submit" value=" 登录" class="btn btn-default" />
         </div>
-        <div class="col-md-2 col-xs-4">
-            <input type="button" onclick="top.location.href='@Url.Action("Register", "Users")'" value="去注册" class="btn btn-default" />
-        </div>
+        @*<div class="col-md-2 col-xs-4">
+                <input type="button" onclick="top.location.href='@Url.Action("Register", "Users")'" value="去注册" class="btn btn-default" />
+            </div>*@
     </div>
 }
 

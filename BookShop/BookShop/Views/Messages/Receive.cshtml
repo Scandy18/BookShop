@@ -1,0 +1,51 @@
+﻿@model BookShop.Models.Message
+
+@using BookShop.Models;
+
+@{
+    ViewBag.Title = "Receive";
+}
+
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true)
+
+<div class="table-responsive">
+    <br /><br />
+    <div class="col-md-2 col-xs-4">
+        <input type="button" onclick="top.location.href='@Url.Action("Send", "Messages")'" value="写信" class="btn btn-default" />
+    </div>
+
+    <br /><br /><h3>收件箱</h3><br />
+    <table border="0" cellspacing="0" cellpadding="0" class="table">
+        <tr class=" label-primary">
+            <th scope="col"><span style="color:white">发件人</span></th>
+            <th scope="col"><span style="color:white">时间</span></th>
+            <th scope="col"><span style="color:white">内容</span></th>
+        </tr>
+        @{
+            DataMaintain db = new DataMaintain();
+            List<Message> msgs = db.Message.ToList();
+            foreach (var msg in msgs)
+            {
+                string sender = "";
+                User user = db.User.Find(msg.Sender);
+                if (user != null)
+                {
+                    sender = user.NickName;
+                }
+                <tr>
+                    <td>@sender</td>
+                    <td>@msg.Time</td>
+                    <td>@msg.Content</td>
+                </tr>
+            }
+        }
+    </table>
+
+    <div class="col-md-2 col-xs-4">
+        <input type="button" onclick="top.location.href='@Url.Action("Index", "Home")'" value="返回" class="btn btn-default" />
+    </div>
+
+</div>
+
